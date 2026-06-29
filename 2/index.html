@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>@veritycheck's portfolio</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+<link rel="stylesheet" href="style.css" />
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.180.0/build/three.module.js"
+  }
+}
+</script>
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <nav class="nav">
+    <a href="#top" class="nav-mark">@veritycheck</a>
+    <div class="nav-links">
+      <a href="#work" class="nav-link">work</a>
+      <a href="#about" class="nav-link">about</a>
+      <a href="#contact" class="nav-link">contact</a>
+    </div>
+    <button class="nav-burger" id="burger" aria-label="open menu">
+      <span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#work">work</a>
+    <a href="#about">about</a>
+    <a href="#contact">contact</a>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero" id="top">
+    <div class="cube-stage" id="cubeStage"></div>
+
+    <p class="hero-eyebrow">// lonely ass dev &amp; creator
+        [yes i used ai for the text]
+    </p>
+    <h1 class="hero-title">
+      I make things
+      <span class="hero-title-italic">nobody asked for</span>
+      and ship them anyway.
+    </h1>
+    <p class="hero-sub">
+      Web experiences, AI tooling, and the occasional cube.
+      Based on Earth. Running <strong>@veritycheck</strong> on TikTok.
+    </p>
+
+    <div class="hero-cta">
+      <a href="#work" class="btn btn-solid">see the work</a>
+      <a href="#contact" class="btn btn-outline">say hi</a>
+    </div>
+
+    <button class="scroll-hint" id="scrollHint" aria-label="scroll down">
+      <span>scroll</span>
+      <svg width="14" height="20" viewBox="0 0 14 20" fill="none">
+        <path d="M7 1V19M7 19L1 13M7 19L13 13" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </header>
+
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>THREE.JS</span><span>•</span>
+      <span>PYTHON</span><span>•</span>
+      <span>FASTAPI</span><span>•</span>
+      <span>GROQ / LLAMA</span><span>•</span>
+      <span>C++</span><span>•</span>
+      <span>ELECTRON</span><span>•</span>
+      <span>AFTER EFFECTS</span><span>•</span>
+      <span>JAVASCRIPT</span><span>•</span>
+      <span>THREE.JS</span><span>•</span>
+      <span>PYTHON</span><span>•</span>
+      <span>FASTAPI</span><span>•</span>
+      <span>GROQ / LLAMA</span><span>•</span>
+      <span>C++</span><span>•</span>
+      <span>ELECTRON</span><span>•</span>
+      <span>AFTER EFFECTS</span><span>•</span>
+      <span>JAVASCRIPT</span><span>•</span>
+    </div>
+  </div>
+
+  <!-- ============ WORK ============ -->
+  <section class="section" id="work">
+    <div class="section-head">
+      <p class="section-label">// projects</p>
+      <h2 class="section-title">Things I built<br>and <span class="smcp">maybe</span> didn't delete.</h2>
+    </div>
+
+    <div class="grid">
+
+      <article class="card" tabindex="0">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <p class="card-tag">ai · chatbot</p>
+            <h3 class="card-title">Verity</h3>
+            <p class="card-flip-hint">flip ↻</p>
+          </div>
+          <a href="https://tryverity.cc/" target="_blank" rel="noopener" class="card-face card-back">
+            <p class="card-tag">02</p>
+            <p class="card-desc">
+              A chatbot built on Llama 3.3 70B via Groq inspired by @thatmob's series "Something is Knocking at Your Door..."
+            </p>
+            <p class="card-stack">Groq API · Llama 3.3 · prompt design</p>
+        </a>
+        </div>
+      </article>
+      <article class="card" tabindex="0">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <p class="card-tag">html · front-end</p>
+            <h3 class="card-title">veritycheck.xyz</h3>
+            <p class="card-flip-hint">flip ↻</p>
+          </div>
+          <a href="https://veritycheck.xyz/1/" target="_blank" rel="noopener" class="card-face card-back">
+            <p class="card-tag">02</p>
+            <p class="card-desc">
+              My portfolio website, the one you're seeing right now! And yes I did use AI a lot for writing most of what you see, I'm not a very good writer.
+            </p>
+            <p class="card-stack">HTML - CSS - JS · front-end · This Website!</p>
+        </a>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <p class="card-tag">desktop · terminal</p>
+            <h3 class="card-title">CRT Terminal</h3>
+            <p class="card-flip-hint">flip ↻</p>
+          </div>
+          <a href="https://veritycheck.xyz/crtterminal" target="_blank" rel="noopener" class="card-face card-back">
+            <p class="card-tag">04</p>
+            <p class="card-desc">
+              An Electron shell running WSL through xterm.js and
+              node-pty, actual CRT terminal style. Fighting styling bullshit made up most of the project. << [Lost / Deleted :( ]
+            </p>
+            <p class="card-stack">Electron · xterm.js · node-pty</p>
+          </a>
+        </div>
+      </article>
+
+      <article class="card" tabindex="0">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <p class="card-tag">video · 3d</p>
+            <h3 class="card-title">Tablet Mocap Markers</h3>
+            <p class="card-flip-hint">flip ↻</p>
+          </div>
+          <div class="card-face card-back">
+            <p class="card-tag">05</p>
+            <p class="card-desc">
+              Motion-tracking markers for Blender, solved without
+              buying hardware: a tablet screen as a backlit marker
+              display. Cheap, weird but it worked. << [No Link]
+            </p>
+            <p class="card-stack">Blender · creative constraints</p>
+        </div>
+        </div>
+      </article>
+
+      <article class="card card-cta" tabindex="0">
+        <div class="card-inner">
+            <a href="https://tiktok.com/@veritycheck" target="_blank" rel="noopener" class="card-face card-front card-front-cta">
+            <p class="card-tag">06</p>
+            <h3 class="card-title">More on<br>TikTok</h3>
+            <p class="card-desc-small">
+              random shit??
+            </p>
+        </a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section about" id="about">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-label">// about</p>
+        <h2 class="section-title">Mostly self-taught,<br>entirely self-directed.</h2>
+        <p class="about-body">
+            I don't have a team, I don't have a friend to help me make stuff, It's just me making things out of boredom, you should totally follow 
+          <strong>@veritycheck</strong> btw.
+        </p>
+        <p class="about-body">
+          I like fun projects, stuff like a captcha that's 
+          impossible for no reason, random characters I like<span class="verityspan"> *cough* verity *cough cough* </span>
+          , and a terminal that glows like it's
+          1987. Useful is good enough. Useful <em>and</em> funny is way better though.
+        </p>
+      </div>
+      <div class="about-facts">
+        <div class="fact">
+          <p class="fact-num">01</p>
+          <p class="fact-label">Based on<p>
+          <p class="fact-val">Planet Earth</p>
+        </div>
+        <div class="fact">
+          <p class="fact-num">02</p>
+          <p class="fact-label">Currently building</p>
+          <p class="fact-val">Absolutely Nothing</p>
+        </div>
+        <div class="fact">
+          <p class="fact-num">03</p>
+          <p class="fact-label">Also runs</p>
+          <p class="fact-val">@veritycheck on TikTok</p>
+        </div>
+        <div class="fact">
+          <p class="fact-num">04</p>
+          <p class="fact-label">Favorite shape</p>
+          <p class="fact-val">cube obvs</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section contact" id="contact">
+    <p class="section-label">// contact</p>
+    <h2 class="contact-title">
+      Got something<br>
+      <span class="contact-title-outline">worth building?</span>
+    </h2>
+    <a href="mailto:off.enqueue@gmail.com" class="contact-link">
+      off.enqueue@gmail.com
+      <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+        <path d="M5 17L17 5M17 5H7M17 5V15" stroke="black" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <div class="contact-socials">
+      <a href="https://tiktok.com/@veritycheck" class="social-pill">@veritycheck</a>
+      <a href="https://tryverity.cc/" class="social-pill">My most popular project</a>
+      <a href="https://github.com/veritycheck" class="social-pill">github</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>made with <3 · no template · 2026</p>
+    <p class="footer-mark">@veritycheck</p>
+  </footer>
+
+  <!-- ============ THREE.JS CUBE (hero) ============ -->
+  <script type="module">
+    import * as THREE from "three";
+
+    const stage = document.getElementById("cubeStage");
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+    camera.position.set(0, 0, 4.2);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setClearColor(0x000000, 0);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    stage.appendChild(renderer.domElement);
+
+    function sizeRenderer() {
+      const size = stage.clientWidth;
+      renderer.setSize(size, size);
+      camera.aspect = 1;
+      camera.updateProjectionMatrix();
+    }
+    sizeRenderer();
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    scene.add(ambientLight);
+
+    const cubeGroup = new THREE.Group();
+    cubeGroup.scale.set(0, 0, 0);
+    scene.add(cubeGroup);
+
+    // Wireframe cube — line art, matches the "fun, not boring B&W" brief
+    const geometry = new THREE.BoxGeometry(1.4, 1.4, 1.4);
+    const edges = new THREE.EdgesGeometry(geometry);
+    const wireMat = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 2 });
+    const wireCube = new THREE.LineSegments(edges, wireMat);
+    cubeGroup.add(wireCube);
+
+    // Faint solid fill so it doesn't look flat
+    const fillMat = new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: 0.04,
+      side: THREE.DoubleSide,
+    });
+    const fillCube = new THREE.Mesh(geometry, fillMat);
+    cubeGroup.add(fillCube);
+
+    // Small solid corner dots for that "designed" feel
+    const dotGeo = new THREE.SphereGeometry(0.035, 8, 8);
+    const dotMat = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    const corners = [
+      [0.7, 0.7, 0.7], [-0.7, 0.7, 0.7], [0.7, -0.7, 0.7], [-0.7, -0.7, 0.7],
+      [0.7, 0.7, -0.7], [-0.7, 0.7, -0.7], [0.7, -0.7, -0.7], [-0.7, -0.7, -0.7],
+    ];
+    corners.forEach(([x, y, z]) => {
+      const dot = new THREE.Mesh(dotGeo, dotMat);
+      dot.position.set(x, y, z);
+      cubeGroup.add(dot);
+    });
+
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    let targetRotationX = 0.4;
+    let targetRotationY = 0.6;
+    let isPointerDown = false;
+    let prevX = 0, prevY = 0;
+
+    function getMeshTargets() {
+      return [wireCube, fillCube];
+    }
+
+    stage.addEventListener("pointerdown", (e) => {
+      const rect = stage.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+      raycaster.setFromCamera(mouse, camera);
+      const hits = raycaster.intersectObjects(getMeshTargets());
+      if (hits.length > 0) {
+        isPointerDown = true;
+        prevX = e.clientX;
+        prevY = e.clientY;
+        stage.style.cursor = "grabbing";
+      }
+    });
+
+    window.addEventListener("pointermove", (e) => {
+      if (!isPointerDown) {
+        const rect = stage.getBoundingClientRect();
+        if (e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom) {
+          mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+          mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+          raycaster.setFromCamera(mouse, camera);
+          const hits = raycaster.intersectObjects(getMeshTargets());
+          stage.style.cursor = hits.length > 0 ? "grab" : "default";
+        }
+        return;
+      }
+      const deltaX = e.clientX - prevX;
+      const deltaY = e.clientY - prevY;
+      targetRotationY += deltaX * 0.008;
+      targetRotationX += deltaY * 0.008;
+      prevX = e.clientX;
+      prevY = e.clientY;
+    });
+
+    function stopDrag() {
+      isPointerDown = false;
+      stage.style.cursor = "default";
+    }
+    window.addEventListener("pointerup", stopDrag);
+    window.addEventListener("pointerleave", stopDrag);
+
+    function animate() {
+      requestAnimationFrame(animate);
+
+      if (cubeGroup.scale.x < 0.999) {
+        cubeGroup.scale.x += (1 - cubeGroup.scale.x) * 0.06;
+        cubeGroup.scale.y += (1 - cubeGroup.scale.y) * 0.06;
+        cubeGroup.scale.z += (1 - cubeGroup.scale.z) * 0.06;
+      } else {
+        cubeGroup.scale.set(1, 1, 1);
+      }
+
+      if (!isPointerDown) {
+        targetRotationY += 0.0045;
+        targetRotationX += 0.0008;
+      }
+
+      cubeGroup.rotation.y += (targetRotationY - cubeGroup.rotation.y) * 0.1;
+      cubeGroup.rotation.x += (targetRotationX - cubeGroup.rotation.x) * 0.1;
+
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener("resize", sizeRenderer);
+  </script>
+
+  <!-- ============ UI BEHAVIOUR ============ -->
+  <script>
+    // mobile menu toggle
+    const burger = document.getElementById("burger");
+    const mobileMenu = document.getElementById("mobileMenu");
+    burger.addEventListener("click", () => {
+      burger.classList.toggle("open");
+      mobileMenu.classList.toggle("open");
+    });
+    mobileMenu.querySelectorAll("a").forEach((a) =>
+      a.addEventListener("click", () => {
+        burger.classList.remove("open");
+        mobileMenu.classList.remove("open");
+      })
+    );
+
+    // scroll hint click
+    document.getElementById("scrollHint").addEventListener("click", () => {
+      document.getElementById("work").scrollIntoView({ behavior: "smooth" });
+    });
+
+    // card flip on tap for touch devices (hover handles desktop via CSS)
+    document.querySelectorAll(".card:not(.card-cta)").forEach((card) => {
+      card.addEventListener("click", () => {
+        card.classList.toggle("flipped");
+      });
+      card.addEventListener("keypress", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          card.classList.toggle("flipped");
+        }
+      });
+    });
+
+    // scroll-reveal
+    const revealEls = document.querySelectorAll(".card, .about-grid, .contact");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    revealEls.forEach((el) => observer.observe(el));
+
+    // nav background on scroll
+    const nav = document.querySelector(".nav");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 40) nav.classList.add("scrolled");
+      else nav.classList.remove("scrolled");
+    });
+  </script>
+
+</body>
+</html>
