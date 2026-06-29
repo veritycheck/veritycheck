@@ -5,6 +5,7 @@ body,
 html {
     background-color: white;
 }
+
 .heading {
     font-family: "Lora", sans-serif;
     text-align: center;
@@ -39,23 +40,31 @@ canvas {
 }
 
 .next {
-    display: flex;
+    /* Positioning */
+    position: fixed; /* Or 'absolute' if you want it pinned to a parent div */
+    bottom: 70px;
+    
+    /* Centering the bulletproof way */
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    
+    /* Your existing styles */
+    display: block;
     cursor: pointer;
-    position: absolute;
-    corner-shape: squircle;
-    border-radius: 16px;
+    border-radius: 16px; /* 'corner-shape' isn't supported, 16px is fine */
     font-weight: 900;
     font-family: "Space Mono", sans-serif;
     border: none;
     padding: 10px 20px;
-    justify-self: center;
-    bottom: 70px;
     background-color: black;
     color: white;
     font-size: 16px;
     transition: transform 0.2s cubic-bezier(0.3, 1.8, 0.5, 1);
-    z-index: 2;
-}
+    z-index: 100; /* Ensure it stays on top */
+  }
 
 .next:hover {
     transform: scaleX(1.28) scaleY(1.05);
