@@ -280,8 +280,6 @@
     const cubeGroup = new THREE.Group();
     cubeGroup.scale.set(0, 0, 0);
     scene.add(cubeGroup);
-
-    // Wireframe cube — line art, matches the "fun, not boring B&W" brief
     const geometry = new THREE.BoxGeometry(1.4, 1.4, 1.4);
     const edges = new THREE.EdgesGeometry(geometry);
     const wireMat = new THREE.LineBasicMaterial({ color: 0x000000, linewidth: 2 });
