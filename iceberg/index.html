@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Internet iceberg >> chip away</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============ NAV ============ -->
+  <nav class="nav">
+    <a href="#top" class="nav-mark"><span class="dot">vch.xyz</span>/iceberg</a>
+    <div class="nav-meta">
+      <span id="layerCounter">layer 00 / 10</span>
+      <button class="btn-reset" id="resetBtn">reset</button>
+    </div>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <header class="hero" id="top">
+    <p class="hero-eyebrow">// the internet, but frozen</p>
+    <h1 class="hero-title">
+      Chip away at the
+      <span class="hero-title-italic">internet iceberg.</span>
+    </h1>
+    <p class="hero-sub">
+      Click the ice. Break through the surface web, keep going,
+      and see what's actually holding this whole thing together.
+    </p>
+
+    <div class="progress-wrap">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <p class="progress-label"><span id="progressPct">0</span>% melted</p>
+    </div>
+  </header>
+
+  <!-- ============ ICEBERG + FACT PANEL ============ -->
+  <section class="main-section" id="berg">
+
+    <div class="berg-col">
+      <div class="iceberg-card" id="icebergCard">
+        <span class="iceberg-depth-tag" id="hudDepth">surface</span>
+
+        <svg class="iceberg-svg" id="icebergSvg" viewBox="0 0 400 480" xmlns="http://www.w3.org/2000/svg">
+          <path id="icebergShape" class="iceberg-shape"
+            d="M40,470 L55,260 L95,210 L130,150 L150,190 L195,70 L220,40 L245,100 L270,150 L300,120 L330,170 L355,230 L365,470 Z" />
+          <g id="crackLayer"></g>
+        </svg>
+
+        <div class="hit-pip hit-pip-iceberg" id="hudPips"></div>
+      </div>
+
+      <div class="berg-instructions" id="bergInstructions">
+        <p><strong>click / tap</strong> the iceberg to chip it. it darkens and cracks as you go.</p>
+      </div>
+    </div>
+
+    <div class="fact-col" id="factSection">
+      <div class="fact-card" id="factCard">
+        <p class="fact-card-label">// depth <span id="factDepth">--</span></p>
+        <h2 class="fact-card-title" id="factTitle">Start chipping</h2>
+        <p class="fact-card-body" id="factBody">
+          Every click reveals a fact about the Internet,
+          from the stuff you scroll past daily to what's actually running underneath it.
+          Get chipping to reveal the first one.
+        </p>
+        <div class="fact-links" id="factLinks"></div>
+      </div>
+
+      <div class="fact-log" id="factLog">
+        <p class="fact-log-label">// uncovered so far</p>
+        <div class="fact-log-list" id="factLogList">
+          <p class="fact-log-empty">nothing yet. get to work.</p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ============ END STATE ============ -->
+  <section class="end-section" id="endSection">
+    <p class="section-label">// the bottom</p>
+    <h2 class="contact-title">
+      You hit the<br>
+      <span class="contact-title-outline">ocean floor.</span>
+    </h2>
+    <p class="end-sub">10 layers down, every fact uncovered. Not bad for someone with a mouse and too much time.</p>
+    <button class="btn btn-solid" id="rebuildBtn">refreeze it</button>
+  </section>
+
+  <footer class="footer">
+    <p>made with &lt;3 · click responsibly · 2026</p>
+    <p class="footer-mark">Internet Iceberg</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
