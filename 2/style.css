@@ -308,7 +308,6 @@ a {
   
   .marquee-track {
     display: inline-flex;
-    /* 🚨 Notice: gap is gone! 🚨 */
     animation: scroll-left 28s linear infinite;
     color: var(--white);
     font-size: 13px;
