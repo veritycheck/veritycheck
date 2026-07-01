@@ -92,7 +92,7 @@ function updateUI(data, name) {
     small.innerText = `${Math.round(c.temperature_2m)}:${Math.round(fahrenheit)}`;
 
     // Hourly
-    hourlyGrid.innerHTML = data.hourly.temperature_2m.slice(0, 12).map((temp, i) => `
+    hourlyGrid.innerHTML = data.hourly.temperature_2m.slice(0, 25).map((temp, i) => `
         <div class="hour-item">
             <p class="hour-time">${i}:00</p>
             <p class="hour-temp">${Math.round(temp)}°</p>
