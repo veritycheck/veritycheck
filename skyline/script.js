@@ -91,13 +91,23 @@ function updateUI(data, name) {
     heroCond.innerText = description + ".";
     small.innerText = `${Math.round(c.temperature_2m)}:${Math.round(fahrenheit)}`;
 
-    // Hourly
-    hourlyGrid.innerHTML = data.hourly.temperature_2m.slice(0, 25).map((temp, i) => `
-        <div class="hour-item">
-            <p class="hour-time">${i}:00</p>
-            <p class="hour-temp">${Math.round(temp)}°</p>
-        </div>
-    `).join('');
+    const currentHour = new Date().getHours();
+
+    // Slice the next 12 hours from the data
+    const hours = data.hourly.time.slice(currentHour, currentHour + 12);
+    const temps = data.hourly.temperature_2m.slice(currentHour, currentHour + 12);
+
+    hourlyGrid.innerHTML = hours.map((timeString, i) => {
+        // Extract the hour (e.g., "2026-07-01T10:00" -> "10:00")
+        const displayHour = timeString.split('T')[1].substring(0, 5);
+        
+        return `
+            <div class="hour-item">
+                <p class="hour-time">${displayHour}</p>
+                <p class="hour-temp">${Math.round(temps[i])}°</p>
+            </div>
+        `;
+    }).join('');
 }
 
 
