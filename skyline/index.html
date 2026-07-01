@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Skyline</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="#top" class="nav-mark"><span class="dot">vch.xyz</span>/skyline</a>
+    <div class="nav-meta">
+      <span id="clockTag">--:--</span>
+      <button class="btn-reset" id="unitBtn">°C / °F</button>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <p class="hero-eyebrow">// the sky, read plainly</p>
+    <h1 class="hero-title">
+      Today it's doing
+      <span class="hero-title-italic" id="heroCond">partly cloudy.</span>
+    </h1>
+    <p class="hero-sub">
+      Search a city, get the number, get on with your day.
+    </p>
+    <div class="search-wrap" style="position: relative;">
+        <input type="text" id="cityInput" placeholder="voluntari, lisbon, osaka…" autocomplete="off" />
+        <div id="autocomplete-list" class="autocomplete-list"></div>
+        <button class="btn btn-solid" id="searchBtn">check sky</button>
+    </div>
+  </header>
+
+  <section class="main-section" id="reading">
+    <div class="temp-col">
+      <div class="temp-card" id="tempCard">
+        <span class="temp-depth-tag" id="hudPlace">surface — London</span>
+
+        <div class="temp-figure">
+          <span class="temp-num" id="tempBig">21</span><span class="temp-unit" id="tempUnit">°C</span>
+        </div>
+        <p class="temp-condition" id="condText">Partly cloudy</p>
+
+        <div class="hit-pip hit-pip-temp" id="gaugePips"></div>
+      </div>
+
+      <div class="berg-instructions">
+        <p><strong>feels like</strong> <span id="feelsLike">20°</span> · humidity <span id="humidity">58%</span> · wind <span id="wind">14 km/h</span> · uv <span id="uv">3</span></p>
+      </div>
+    </div>
+
+    <div class="fact-col">
+      <div class="fact-card" id="hourCard">
+        <p class="fact-card-label">// next hours</p>
+        <h2 class="fact-card-title">Hour by hour</h2>
+        <div class="hourly-grid" id="hourlyGrid"></div>
+      </div>
+
+      <div class="fact-log">
+        <p class="fact-log-label">// 7-day outlook</p>
+        <div class="fact-log-list" id="forecastList"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>made with &lt;3 · check responsibly · 2026</p>
+    <p class="footer-mark">Skyline</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
