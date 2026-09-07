@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#000"/>
+  <g fill="none" stroke="#fff" stroke-width="3">
+    <path d="M200 90 L265 125 L265 195 L200 230 L135 195 L135 125 Z"/>
+    <path d="M200 90 L200 160 M265 125 L200 160 L135 125 M200 160 L200 230"/>
+    <circle cx="200" cy="90" r="4" fill="#fff"/>
+    <circle cx="265" cy="125" r="4" fill="#fff"/>
+    <circle cx="135" cy="125" r="4" fill="#fff"/>
+    <circle cx="200" cy="160" r="4" fill="#fff"/>
+    <circle cx="265" cy="195" r="4" fill="#fff"/>
+    <circle cx="135" cy="195" r="4" fill="#fff"/>
+    <circle cx="200" cy="230" r="4" fill="#fff"/>
+  </g>
+  <text x="200" y="272" fill="#fff" font-family="Georgia, serif" font-size="20" text-anchor="middle">the cube himself</text>
+</svg>

@@ -1,16 +1,17 @@
 const VIDEO_URL = "https://www.tiktok.com/@veritycheck/video/7679036782750534934";
-const CACHE_SECONDS = 600;
+const CACHE_SECONDS = 30;
+const MAX_PAGES = 20;
 
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     const video = url.searchParams.get("url") || env.VIDEO_URL || VIDEO_URL;
 
-    if (!video || video.startsWith("PASTE_YOUR")) {
-      return json(
-        { error: "set VIDEO_URL in worker.js or pass ?url=<tiktok video url>" },
-        400
-      );
+    if (
+      !video ||
+      !/^https:\/\/(www\.)?tiktok\.com\/@veritycheck\/video\/\d+/.test(video)
+    ) {
+      return json({ error: "only @veritycheck videos are allowed" }, 403);
     }
 
     const cacheKey = new Request("https://cache.veritycheck/" + video);
@@ -20,18 +21,41 @@ export default {
     }
 
     try {
-      const upstream = await fetch(
-        "https://www.tikwm.com/api/comment/list/?url=" +
-          encodeURIComponent(video) +
-          "&count=50"
-      );
-      const payload = await upstream.json();
-      const comments = payload?.data?.comments;
-      if (payload.code !== 0 || !Array.isArray(comments)) {
-        return json({ error: "upstream returned no comments" }, 502);
+      const seen = new Map();
+      let cursor = 0;
+
+      for (let page = 0; page < MAX_PAGES; page++) {
+        const upstream = await fetch(
+          "https://www.tikwm.com/api/comment/list/?url=" +
+            encodeURIComponent(video) +
+            "&count=50&cursor=" +
+            cursor
+        );
+        const payload = await upstream.json();
+        const batch = payload?.data?.comments;
+
+        if (payload.code !== 0 || !Array.isArray(batch) || batch.length === 0) {
+          break;
+        }
+
+        for (const c of batch) {
+          const id = String(c.id || c.comment_id || "");
+          if (id && !seen.has(id)) {
+            seen.set(id, c);
+          }
+        }
+
+        if (!payload.data?.has_more) {
+          break;
+        }
+        cursor = payload.data?.cursor ?? cursor + batch.length;
       }
 
-      const pins = comments
+      if (seen.size === 0) {
+        return json({ error: "no comments found" }, 502);
+      }
+
+      const pins = [...seen.values()]
         .map((c) => ({
           user: c.user?.unique_id || c.user?.nickname || "unknown",
           avatar: c.user?.avatar || "",
@@ -40,12 +64,13 @@ export default {
           id: String(c.id || c.comment_id || ""),
         }))
         .filter((p) => p.comment)
-        .sort(
-          (a, b) => a.time - b.time || a.id.localeCompare(b.id)
-        );
+        .sort((a, b) => a.time - b.time || a.id.localeCompare(b.id));
 
       const response = json(pins);
-      response.headers.set("cache-control", "public, max-age=" + CACHE_SECONDS);
+      response.headers.set(
+        "cache-control",
+        "public, max-age=" + CACHE_SECONDS
+      );
       ctx.waitUntil(caches.default.put(cacheKey, response.clone()));
       return response;
     } catch {
