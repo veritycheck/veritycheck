@@ -1,4 +1,4 @@
-const VIDEO_URL = "https://www.tiktok.com/@veritycheck/video/7679036782750534934";
+const VIDEO_URL = "https://www.tiktok.com/@veritycheck/video/7682866518173994262";
 const CACHE_SECONDS = 30;
 const MAX_PAGES = 20;
 
@@ -52,7 +52,13 @@ export default {
       }
 
       if (seen.size === 0) {
-        return json({ error: "no comments found" }, 502);
+        const empty = json([]);
+        empty.headers.set(
+          "cache-control",
+          "public, max-age=" + CACHE_SECONDS
+        );
+        ctx.waitUntil(caches.default.put(cacheKey, empty.clone()));
+        return empty;
       }
 
       const pins = [...seen.values()]

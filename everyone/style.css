@@ -194,6 +194,26 @@ img.pin-avatar {
   opacity: 0.85;
 }
 
+.empty-state {
+  column-span: all;
+  text-align: center;
+  padding: 70px 20px 40px;
+  opacity: 0.55;
+}
+
+.empty-title {
+  margin: 0;
+  font-family: "Lora", serif;
+  font-style: italic;
+  font-size: 26px;
+}
+
+.empty-sub {
+  margin: 10px 0 0;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
 .footer {
   position: fixed;
   right: 16px;

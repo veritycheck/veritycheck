@@ -44,54 +44,6 @@
   document.getElementById("wallName").textContent =
     NAMES[Math.floor(Math.random() * NAMES.length)];
 
-  const FALLBACK_PINS = [
-    {
-      user: "veritys_biggest_fan",
-      avatar: "",
-      comment: "first",
-    },
-    {
-      user: "definitely_not_a_bot",
-      avatar: "",
-      comment: "beep boop. i mean. hey guys",
-    },
-    {
-      user: "gravity_hater",
-      avatar: "",
-      comment: "how do i get on the famous wall",
-    },
-    {
-      user: "cube_enjoyer",
-      avatar: "",
-      comment: "the cube told me to say hi",
-    },
-    {
-      user: "comment_section",
-      avatar: "",
-      comment: "pulled straight from the comments, can confirm, i am the comments",
-    },
-    {
-      user: "sleep_deprived_dev",
-      avatar: "",
-      comment: "this website loaded faster than my will to live",
-    },
-    {
-      user: "qa_tester",
-      avatar: "",
-      comment: "clicked every pin. they wobble. approved.",
-    },
-    {
-      user: "anonymous_lurker",
-      avatar: "",
-      comment: "just here for the vibes",
-    },
-    {
-      user: "professional_lurker",
-      avatar: "",
-      comment: "second",
-    },
-  ];
-
   const COMMENT_FEED_URL = "";
   const POLL_MS = 10000;
 
@@ -107,7 +59,14 @@
     board.innerHTML = "";
 
     document.getElementById("wallCount").textContent =
-      pins.length + " people";
+      pins.length + (pins.length === 1 ? " person" : " people");
+
+    if (pins.length === 0) {
+      board.innerHTML =
+        '<div class="empty-state"><p class="empty-title">no one here yet!</p><p class="empty-sub">comment on the video to get on the wall</p></div>';
+      return;
+    }
+
     pins.forEach((data, i) => {
       const pin = document.createElement("article");
       pin.className = "pin";
@@ -145,11 +104,10 @@
     return fetch(bust)
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error("bad response"))))
       .then((data) => {
-        const pins = Array.isArray(data) ? data : data.pins;
-        if (!Array.isArray(pins) || pins.length === 0) {
-          throw new Error("empty");
+        if (Array.isArray(data)) {
+          return data;
         }
-        return pins;
+        return Array.isArray(data?.pins) ? data.pins : null;
       });
   }
 
@@ -159,9 +117,12 @@
 
   function tryNext(i) {
     if (i >= sources.length) {
-      return Promise.resolve(FALLBACK_PINS);
+      return Promise.resolve([]);
     }
-    return tryFetch(sources[i]).catch(() => tryNext(i + 1));
+    return tryFetch(sources[i]).then(
+      (pins) => (Array.isArray(pins) ? pins : tryNext(i + 1)),
+      () => tryNext(i + 1)
+    );
   }
 
   function refresh() {

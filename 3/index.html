@@ -99,12 +99,12 @@
   loadCount(
     "../celebrity/pins.json",
     document.getElementById("topCount"),
-    (n) => n + " cool people"
+    (n) => n + (n === 1 ? " cool person" : " cool people")
   );
   loadCount(
     "../everyone/comments.json",
     document.getElementById("bottomCount"),
-    (n) => n + " people"
+    (n) => n + (n === 1 ? " person" : " people")
   );
 </script>
 

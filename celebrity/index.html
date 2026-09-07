@@ -62,7 +62,7 @@
 
   function render(pins) {
     document.getElementById("wallCount").textContent =
-      pins.length + " cool people";
+      pins.length + (pins.length === 1 ? " cool person" : " cool people");
     pins.forEach((data, i) => {
     const pin = document.createElement("article");
     pin.className = "pin";
