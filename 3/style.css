@@ -1,0 +1,190 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+:root {
+  --black: #000;
+  --white: #fff;
+  --spring: cubic-bezier(0.3, 1.8, 0.5, 1);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--white);
+  color: var(--black);
+  overflow: hidden;
+  font-family: "Space Mono", monospace;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+::selection {
+  background: var(--black);
+  color: var(--white);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+}
+
+.title {
+  margin: 0;
+  font-family: "Lora", serif;
+  font-size: clamp(32px, 5vw, 56px);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+.doors {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: min(420px, 100%);
+}
+
+.door {
+  position: relative;
+  overflow: hidden;
+  font-family: "Space Mono", monospace;
+  cursor: pointer;
+  border-radius: 18px;
+  border: 1.5px solid var(--black);
+  padding: 26px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: left;
+  transition:
+    transform 0.25s var(--spring),
+    background-color 0.2s var(--ease),
+    color 0.2s var(--ease),
+    box-shadow 0.25s var(--ease);
+}
+
+.door-label {
+  font-family: "Lora", serif;
+  font-size: clamp(22px, 3.4vw, 30px);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.door-count {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  opacity: 0.55;
+}
+
+.door-hint {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  opacity: 0.4;
+  align-self: flex-end;
+  position: absolute;
+  right: 22px;
+  bottom: 18px;
+  transition: opacity 0.2s var(--ease), transform 0.25s var(--spring);
+}
+
+.door-top {
+  background: var(--black);
+  color: var(--white);
+}
+
+.door-top:hover {
+  transform: scaleX(1.05) scaleY(1.03) rotate(-0.5deg);
+  box-shadow: 6px 6px 0 var(--black);
+}
+
+.door-top:active {
+  transform: scaleX(0.97) scaleY(0.94);
+  box-shadow: none;
+}
+
+.door-bottom {
+  background: transparent;
+  color: var(--black);
+}
+
+.door-bottom:hover {
+  background: var(--black);
+  color: var(--white);
+  transform: scaleX(1.05) scaleY(1.03) rotate(0.5deg);
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.25);
+}
+
+.door-bottom:active {
+  transform: scaleX(0.97) scaleY(0.94);
+  box-shadow: none;
+}
+
+.door:hover .door-hint {
+  opacity: 0.85;
+  transform: translateX(-4px);
+}
+
+.door-label.pop {
+  animation: label-pop 0.45s var(--spring);
+}
+
+@keyframes label-pop {
+  0% { transform: scale(1) rotate(0deg); }
+  30% { transform: scale(1.12) rotate(-2deg); }
+  60% { transform: scale(0.96) rotate(1deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.door {
+  opacity: 0;
+  translate: 0 24px;
+  animation: door-in 0.7s var(--ease) forwards;
+}
+
+.door-bottom {
+  animation-delay: 0.12s;
+}
+
+@keyframes door-in {
+  to { opacity: 1; translate: 0 0; }
+}
+
+.footer {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 100;
+  background: var(--white);
+  border: 1.5px solid var(--black);
+  border-radius: 14px;
+  padding: 6px 12px;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+.footer-mark {
+  margin: 0;
+  font-family: "Lora", serif;
+  font-weight: 700;
+  font-size: 12px;
+  opacity: 1;
+}

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>@veritycheck</title>
+<link rel="icon" type="image/x-icon" href="/1/favicon.ico">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="head">
+    <h1 class="title" id="wallName">…</h1>
+    <p class="count" id="wallCount"></p>
+    <p class="sub">famous people that dm'd me??</p>
+    <a class="back" href="/3/">&larr; pick a door</a>
+  </header>
+
+  <main class="board" id="board"></main>
+
+  <footer class="footer">
+    <p class="footer-mark">@veritycheck</p>
+  </footer>
+
+<script>
+
+  const FALLBACK_PINS = [
+    {
+      name: "we had an issue i think",
+      photo: "/celebrity/cat.jpg",
+      description: "meow meow meow",
+      quote: "interesting quote",
+    },
+  ];
+
+  const NAMES = [
+    "Hall of Fame",
+    "The Famous List",
+    "Celebrity Sightings",
+    "Hall of Sightings",
+    "The Celebrity Wall",
+  ];
+  document.getElementById("wallName").textContent =
+    NAMES[Math.floor(Math.random() * NAMES.length)];
+
+  const board = document.getElementById("board");
+
+  const initials = (name) =>
+    name.split(/\s+/).slice(0, 2).map((w) => w[0]).join("").toUpperCase();
+
+  function render(pins) {
+    document.getElementById("wallCount").textContent =
+      pins.length + " cool people";
+    pins.forEach((data, i) => {
+    const pin = document.createElement("article");
+    pin.className = "pin";
+    pin.style.setProperty("--tilt", (Math.random() * 3 - 1.5).toFixed(2) + "deg");
+    pin.style.setProperty("--i", i);
+
+    const photo = data.photo
+      ? `<img class="pin-photo-img" src="${data.photo}" alt="${data.name}">`
+      : `<div class="pin-photo-empty">${initials(data.name)}</div>`;
+
+    pin.innerHTML = `
+      <figure class="pin-photo">${photo}</figure>
+      <h2 class="pin-name">${data.name}</h2>
+      ${data.description ? `<p class="pin-desc">${data.description}</p>` : ""}
+      ${data.quote ? `<blockquote class="pin-quote">&ldquo;${data.quote}&rdquo;</blockquote>` : ""}
+    `;
+    pin.addEventListener("click", () => {
+      pin.classList.remove("is-popping");
+      void pin.offsetWidth;
+      pin.classList.add("is-popping");
+    });
+    pin.addEventListener("animationend", () => pin.classList.remove("is-popping"));
+
+    board.appendChild(pin);
+    });
+  }
+
+  function tryFetch(url) {
+    return fetch(url)
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("bad response"))))
+      .then((data) => {
+        const pins = Array.isArray(data) ? data : data.pins;
+        if (!Array.isArray(pins) || pins.length === 0) {
+          throw new Error("empty");
+        }
+        return pins;
+      });
+  }
+
+  tryFetch("pins.json")
+    .then(render)
+    .catch(() => render(FALLBACK_PINS));
+</script>
+
+</body>
+</html>

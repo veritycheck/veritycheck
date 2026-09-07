@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>@veritycheck</title>
+<link rel="icon" type="image/x-icon" href="/1/favicon.ico">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="head">
+    <h1 class="title" id="wallName">…</h1>
+    <p class="count" id="wallCount"></p>
+    <p class="sub">coolish people that commented on my video</p>
+    <a class="back" href="/3/">&larr; pick a door</a>
+  </header>
+
+  <main class="board" id="board"></main>
+
+  <footer class="footer">
+    <p class="footer-mark">@veritycheck</p>
+  </footer>
+
+<script>
+  const NAMES = [
+    "The Normal Wall",
+    "The Guest List",
+    "The Guestbook",
+    "Everyone else",
+  ];
+  document.getElementById("wallName").textContent =
+    NAMES[Math.floor(Math.random() * NAMES.length)];
+
+  const FALLBACK_PINS = [
+    {
+      user: "veritys_biggest_fan",
+      avatar: "",
+      comment: "first",
+    },
+    {
+      user: "definitely_not_a_bot",
+      avatar: "",
+      comment: "beep boop. i mean. hey guys",
+    },
+    {
+      user: "gravity_hater",
+      avatar: "",
+      comment: "how do i get on the famous wall",
+    },
+    {
+      user: "cube_enjoyer",
+      avatar: "",
+      comment: "the cube told me to say hi",
+    },
+    {
+      user: "comment_section",
+      avatar: "",
+      comment: "pulled straight from the comments, can confirm, i am the comments",
+    },
+    {
+      user: "sleep_deprived_dev",
+      avatar: "",
+      comment: "this website loaded faster than my will to live",
+    },
+    {
+      user: "qa_tester",
+      avatar: "",
+      comment: "clicked every pin. they wobble. approved.",
+    },
+    {
+      user: "anonymous_lurker",
+      avatar: "",
+      comment: "just here for the vibes",
+    },
+    {
+      user: "professional_lurker",
+      avatar: "",
+      comment: "second",
+    },
+  ];
+
+  const board = document.getElementById("board");
+
+  function render(pins) {
+    document.getElementById("wallCount").textContent =
+      pins.length + " people";
+    pins.forEach((data, i) => {
+      const pin = document.createElement("article");
+      pin.className = "pin";
+      pin.style.setProperty("--tilt", (Math.random() * 3 - 1.5).toFixed(2) + "deg");
+      pin.style.setProperty("--i", i);
+
+      const handle = data.user.startsWith("@") ? data.user : "@" + data.user;
+      const avatar = data.avatar
+        ? `<img class="pin-avatar" src="${data.avatar}" alt="${handle}">`
+        : `<span class="pin-avatar">${handle[1].toUpperCase()}</span>`;
+      const badge = i === 0 ? `<span class="pin-badge">#first</span>` : "";
+
+      pin.innerHTML = `
+        <div class="pin-head">
+          ${avatar}
+          <span class="pin-user">${handle}</span>
+          ${badge}
+        </div>
+        <p class="pin-comment">${data.comment}</p>
+      `;
+
+      pin.addEventListener("click", () => {
+        pin.classList.remove("is-popping");
+        void pin.offsetWidth;
+        pin.classList.add("is-popping");
+      });
+      pin.addEventListener("animationend", () => pin.classList.remove("is-popping"));
+
+      board.appendChild(pin);
+    });
+  }
+
+  const COMMENT_FEED_URL = "https://www.tiktok.com/@veritycheck/video/7679036782750534934";
+
+  function tryFetch(url) {
+    return fetch(url)
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("bad response"))))
+      .then((data) => {
+        const pins = Array.isArray(data) ? data : data.pins;
+        if (!Array.isArray(pins) || pins.length === 0) {
+          throw new Error("empty");
+        }
+        return pins;
+      });
+  }
+
+  const sources = COMMENT_FEED_URL
+    ? [COMMENT_FEED_URL, "comments.json"]
+    : ["comments.json"];
+
+  function tryNext(i) {
+    if (i >= sources.length) {
+      return Promise.resolve(FALLBACK_PINS);
+    }
+    return tryFetch(sources[i]).catch(() => tryNext(i + 1));
+  }
+
+  tryNext(0).then(render);
+</script>
+
+</body>
+</html>

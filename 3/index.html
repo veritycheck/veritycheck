@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>@veritycheck's walls</title>
+<link rel="icon" type="image/x-icon" href="/1/favicon.ico">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <main class="page">
+    <h1 class="title">pick a door</h1>
+
+    <div class="doors">
+      <button class="door door-top" id="topBtn" type="button">
+        <span class="door-label" id="topLabel">…</span>
+        <span class="door-count" id="topCount"></span>
+        <span class="door-hint">click me</span>
+      </button>
+
+      <button class="door door-bottom" id="bottomBtn" type="button">
+        <span class="door-label" id="bottomLabel">…</span>
+        <span class="door-count" id="bottomCount"></span>
+        <span class="door-hint">click me</span>
+      </button>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <p class="footer-mark">@veritycheck</p>
+  </footer>
+
+<script>
+  const TOP_NAMES = [
+    "Hall of Fame",
+    "The Famous List",
+    "Celebrity Sightings",
+    "Hall of Sightings",
+    "The Celebrity Wall",
+  ];
+  const BOTTOM_NAMES = [
+    "The Normal Wall",
+    "The Guest List",
+    "The Guestbook",
+    "Everyone else",
+  ];
+
+  const topLabel = document.getElementById("topLabel");
+  const bottomLabel = document.getElementById("bottomLabel");
+
+  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+  topLabel.textContent = pick(TOP_NAMES);
+  bottomLabel.textContent = pick(BOTTOM_NAMES);
+  function popLabel(labelEl) {
+    labelEl.classList.remove("pop");
+    void labelEl.offsetWidth;
+    labelEl.classList.add("pop");
+  }
+
+  const topBtn = document.getElementById("topBtn");
+  const bottomBtn = document.getElementById("bottomBtn");
+  topBtn.addEventListener("click", () => {
+    popLabel(topLabel);
+    setTimeout(() => { window.location.href = "/celebrity/"; }, 300);
+  });
+
+  bottomBtn.addEventListener("click", () => {
+    popLabel(bottomLabel);
+    setTimeout(() => { window.location.href = "/everyone/"; }, 300);
+  });
+
+  function loadCount(url, el, format) {
+    fetch(url)
+      .then((r) => (r.ok ? r.json() : Promise.reject(new Error("bad response"))))
+      .then((data) => {
+        const pins = Array.isArray(data) ? data : data.pins;
+        if (Array.isArray(pins) && pins.length > 0) {
+          el.textContent = format(pins.length);
+        }
+      })
+      .catch(() => {});
+  }
+
+  loadCount(
+    "/celebrity/pins.json",
+    document.getElementById("topCount"),
+    (n) => n + " cool people"
+  );
+  loadCount(
+    "/everyone/comments.json",
+    document.getElementById("bottomCount"),
+    (n) => n + " people"
+  );
+</script>
+
+</body>
+</html>
