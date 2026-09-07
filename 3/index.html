@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 <title>@veritycheck's walls</title>
-<link rel="icon" type="image/x-icon" href="/1/favicon.ico">
+<link rel="icon" type="image/x-icon" href="../1/favicon.ico">
 
 <meta property="og:title" content="The Walls" />
 <meta property="og:description" content="pick a door: one for the famous, one for everyone else. the names re-roll every refresh." />
@@ -76,12 +76,12 @@
   const bottomBtn = document.getElementById("bottomBtn");
   topBtn.addEventListener("click", () => {
     popLabel(topLabel);
-    setTimeout(() => { window.location.href = "/celebrity/"; }, 300);
+    setTimeout(() => { window.location.href = "../celebrity/"; }, 300);
   });
 
   bottomBtn.addEventListener("click", () => {
     popLabel(bottomLabel);
-    setTimeout(() => { window.location.href = "/everyone/"; }, 300);
+    setTimeout(() => { window.location.href = "../everyone/"; }, 300);
   });
 
   function loadCount(url, el, format) {
@@ -97,12 +97,12 @@
   }
 
   loadCount(
-    "/celebrity/pins.json",
+    "../celebrity/pins.json",
     document.getElementById("topCount"),
     (n) => n + " cool people"
   );
   loadCount(
-    "/everyone/comments.json",
+    "../everyone/comments.json",
     document.getElementById("bottomCount"),
     (n) => n + " people"
   );
