@@ -2,7 +2,7 @@ import json
 import urllib.request
 import urllib.parse
 
-VIDEO_URL = "https://www.tiktok.com/@veritycheck/video/7682866518173994262"
+VIDEO_URL = "https://www.tiktok.com/@veritycheck/video/7683055096590077206"
 OUTPUT = "../everyone/comments.json"
 UA = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"

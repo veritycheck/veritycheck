@@ -1,4 +1,4 @@
-const VIDEO_URL = "https://www.tiktok.com/@veritycheck/video/7682866518173994262";
+const VIDEO_URL = "https://www.tiktok.com/@veritycheck/video/7683055096590077206";
 const CACHE_SECONDS = 30;
 const MAX_PAGES = 20;
 
