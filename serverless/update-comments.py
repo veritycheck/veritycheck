@@ -1,4 +1,5 @@
 import json
+import time
 import urllib.request
 import urllib.parse
 
@@ -15,11 +16,37 @@ def fetch_json(url):
         return json.loads(r.read().decode("utf-8"))
 
 
+def fetch_comments(video_url, cursor=0, count=50):
+    endpoint = (
+        "https://www.tikwm.com/api/comment/list/?url="
+        + urllib.parse.quote(video_url, safe="")
+        + "&count="
+        + str(count)
+        + "&cursor="
+        + str(cursor)
+    )
+    return fetch_json(endpoint)
+
+
+def fetch_with_retry(url, attempts=4):
+    delay = 5
+    for i in range(attempts):
+        try:
+            return fetch_json(url)
+        except Exception as exc:
+            if i == attempts - 1:
+                raise
+            print("attempt", i + 1, "failed:", exc, "- retrying in", delay, "s")
+            time.sleep(delay)
+            delay *= 2
+
+
 def main():
-    endpoint = "https://www.tikwm.com/api/comment/list/?url=" + urllib.parse.quote(
-        VIDEO_URL, safe=""
-    ) + "&count=50"
-    data = fetch_json(endpoint)
+    data = fetch_with_retry(
+        "https://www.tikwm.com/api/comment/list/?url="
+        + urllib.parse.quote(VIDEO_URL, safe="")
+        + "&count=50"
+    )
     comments = (data.get("data") or {}).get("comments") or []
 
     pins = []

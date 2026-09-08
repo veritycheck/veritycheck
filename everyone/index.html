@@ -45,6 +45,7 @@
     NAMES[Math.floor(Math.random() * NAMES.length)];
 
   const COMMENT_FEED_URL = "";
+  const VIDEO_ID = "7683055096590077206";
   const POLL_MS = 10000;
 
   const board = document.getElementById("board");
@@ -99,21 +100,45 @@
     });
   }
 
+  function normalize(data) {
+    if (Array.isArray(data)) {
+      return data.map((p) => ({ ...p, _t: 0, _id: "" }));
+    }
+    if (Array.isArray(data?.pins)) {
+      return data.pins.map((p) => ({ ...p, _t: 0, _id: "" }));
+    }
+    const list = data?.data?.comments;
+    if (Array.isArray(list)) {
+      return list
+        .map((c) => ({
+          user: c.user?.unique_id || c.user?.nickname || "unknown",
+          avatar: c.user?.avatar || "",
+          comment: (c.text || "").trim(),
+          _t: c.create_time || 0,
+          _id: String(c.id || c.comment_id || ""),
+        }))
+        .filter((p) => p.comment)
+        .sort((a, b) => a._t - b._t || a._id.localeCompare(b._id));
+    }
+    return null;
+  }
+
   function tryFetch(url) {
     const bust = url + (url.includes("?") ? "&" : "?") + "t=" + Date.now();
     return fetch(bust)
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error("bad response"))))
-      .then((data) => {
-        if (Array.isArray(data)) {
-          return data;
-        }
-        return Array.isArray(data?.pins) ? data.pins : null;
-      });
+      .then(normalize);
   }
 
-  const sources = COMMENT_FEED_URL
-    ? [COMMENT_FEED_URL, "comments.json"]
-    : ["comments.json"];
+  const tikwmUrl = "https://www.tikwm.com/api/comment/list/?url=" +
+    encodeURIComponent("https://www.tiktok.com/@veritycheck/video/" + VIDEO_ID) +
+    "&count=50";
+
+  const sources = [tikwmUrl];
+  if (COMMENT_FEED_URL) {
+    sources.push(COMMENT_FEED_URL);
+  }
+  sources.push("comments.json");
 
   function tryNext(i) {
     if (i >= sources.length) {
@@ -130,9 +155,7 @@
   }
 
   refresh();
-  if (COMMENT_FEED_URL) {
-    setInterval(refresh, POLL_MS);
-  }
+  setInterval(refresh, POLL_MS);
 </script>
 
 </body>
